@@ -1,6 +1,4 @@
-# Project Title
-
-JS STUDY MATERIAL
+# JS STUDY
 
 ## Acknowledgments
 
