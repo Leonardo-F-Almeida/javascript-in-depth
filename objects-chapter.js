@@ -180,3 +180,56 @@ var properties = [
 for(i = 0; i < properties.length; i += 1){
     //console.log(properties[i], ':', another_stooge[i])
 }
+
+
+/*
+* DELETE
+*
+*/
+
+//Removing a property from an object may allw a property from the prototype linkage
+//to shine through:
+
+//console.log(another_stooge.nickname) // 'Moe'
+
+//Remove nickname from another_stooge, revealing
+//the nickname of the prototype;
+
+//delete another_stooge.nickname;
+
+//console.log(another_stooge.nickname) // 'Curly'
+
+
+/*
+* GLOBAL ABATEMENT
+*
+*/
+
+// One way to minimize the use of global variables is to create a single global variable
+// for your application:
+
+var MYAPP = {};
+
+//The variable then becomes the container for your application:
+
+MYAPP.stooge = {
+    "first_name":"Joe",
+    "last_name":"Howard"
+}
+
+MYAPP.flight = {
+    airline: "Oceanic",
+    number: 815,
+    departure: {
+        IATA: "SYD",
+        time: "2004-09-22 14:55",
+        city: "Sydney"
+    },
+    arrival: {
+        IATA: "LAX",
+        time: "2004-09-23 10:42",
+        city: "Los angeles"
+    }
+}
+
+console.log(MYAPP)
