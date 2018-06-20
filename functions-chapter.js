@@ -103,3 +103,83 @@ var statusObject = {
 var status = Quo.prototype.get_status.apply(statusObject)
 
 //console.log(status)
+
+/*
+* ARGUMENTS
+*/
+
+// Make a function that adds a lot of stuff.
+
+// Note that defining the variable sum inside of
+// the function does not interfere with the sum
+// defined outside of the function. The function
+// only sees the inner once.
+
+// THIS IS NOT A USEFUL PATTERN
+var sumWithArgs = function(){
+    var i, sum = 0
+
+    for(i = 0; i < arguments.length; i += 1){
+        sum += arguments[i]
+    }
+
+    return sum
+}
+
+//console.log(sumWithArgs(1,2,3,4,5,6))
+
+/*
+* EXCEPTIONS
+*/
+
+var add = function(a,b){
+    if(typeof a !== 'number' || typeof b !== 'number'){
+        throw{
+            name:'TypeError',
+            message:'add needs numbers'
+        }
+    }
+
+    return a + b
+}
+
+// Make a try_it function that calls the new add
+// function incorrectly.
+
+var try_it = function(){
+    try{
+        add("seven")
+    } catch(e){
+        console.log(e.name,":",e.message)
+    }
+}
+
+//try_it()
+
+/*
+* AUGMENTING TYPES
+*/
+
+// JavasScript allows the basic types of the language to be augmented
+// adding a method to Object.prototype makes the method available to all
+// objects. This also works for functions, arrays, strings, numbers,
+// regular expressions and booleans
+
+Function.prototype.method = function(name, func){
+    if(!this.prototype[name]){
+        this.prototype[name] = func
+        return this
+    }
+}
+
+Number.method('integer', function(){
+    return Math[this < 0 ? 'ceil' : 'floor'](this)
+})
+
+//console.log((-10/3).integer())
+
+String.method('trim',function(){
+    return this.replace(/^\s+|\s+$/g,'')
+})
+
+console.log("      teste      ".trim())
