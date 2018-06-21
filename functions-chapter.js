@@ -183,3 +183,60 @@ String.method('trim',function(){
 })
 
 console.log("      teste      ".trim())
+
+/*
+* RECURSION
+*/
+
+var hanoi = function hanoi(disc,src, aux, dst){
+    if(disc > 0){
+        hanoi(disc -1, src, dst, aux)
+        console.log('Move disc ', disc, ' from ', src, ' to ', dst)
+        hanoi(disc -1, aux, src, dst)
+    }
+}
+
+//hanoi(3, 'Src', 'Aux', 'dest')
+
+// Some Languages oofer the tail recursion optimization. This means that
+// if a function returns the result of invoking itself recursively,
+// then the invocation is replaced with a loop, wich can significantly spped things up.
+// Unfortunately, JavaScript does not currently provide tail recursion optimization.
+// Functions that recurse very deeply can fail by exhausting the return stack:
+
+// Makes a factorial function with tail recursion.
+// It is tail recursive because it return the result of calling itself
+
+var factorial = function factorial(i, a){
+    a = a || 1
+    if(i < 2){
+        return a
+    }
+    return factorial(i - 1, a * i)
+}
+
+//console.log(factorial(4))
+
+/*
+* SCOPE
+*/
+
+var foo = function(){
+    var a = 3, b = 5
+
+    var bar = function(){
+        var b = 7, c = 11
+
+        // At this point, a is 3, b is 7, and c is 11
+        a += b + c
+        // At this point, a is 21, b is 7, and c is 11
+    }
+
+    //at this point,, a is 3, b is 5, and c is not defined
+
+    bar()
+
+    //At this point, a is 21, b is 5
+
+
+}
