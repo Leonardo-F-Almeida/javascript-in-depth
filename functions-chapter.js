@@ -240,3 +240,40 @@ var foo = function(){
 
 
 }
+
+
+/*
+* CLOSURE
+*/
+
+// Instead of initializing myObject with an object literal, we will initialize my Object
+// by calling a function that return an object literal. That function defines a value variable.
+// That variable is always available to the increment and getValue method, but the function´s scope
+// keeps it hidden from the rest of the program.
+// We are not assigning a function to myObject. We are assigning the result of involking that function
+var myObject = (function (){
+    var value = 0
+
+    return{
+        increment: function(inc){
+            value += typeof inc === 'number' ? inc : 1
+        },
+        getValue: function(){
+            return value
+        }
+    }
+}())
+
+
+//console.log(myObject.getValue())
+
+var quo = function(status){
+    return {
+        get_status : function(){
+            return status
+        }
+    }
+}
+
+var myQuo = quo("amazed")
+console.log(myQuo.get_status())
