@@ -182,7 +182,7 @@ String.method('trim',function(){
     return this.replace(/^\s+|\s+$/g,'')
 })
 
-console.log("      teste      ".trim())
+//console.log("      teste      ".trim())
 
 /*
 * RECURSION
@@ -276,4 +276,65 @@ var quo = function(status){
 }
 
 var myQuo = quo("amazed")
-console.log(myQuo.get_status())
+//console.log(myQuo.get_status())
+
+
+/*
+* CALLBACKS
+*/
+
+
+/*
+* MODULE
+*/
+
+// We can use functions and closure to make modules. A module is a function or object
+// that presents an interface but hides its state and implementation
+// By using functions to produce modules, we can almost completely eliminate our
+// use of global variables.
+
+String.method('deentityify', function(){
+
+
+    var entity = {
+        quot: '"',
+        lt:   '<',
+        gt:   '>'
+    }
+    // It calls the string replace method, looking for substrings that start with '&'
+    // and end with ';'. If the characters in between are in the entity table, then replace the
+    // entity with the character from the table
+    return function(){
+        return this.replace(/&([^&;]+);/g, function(a,b){
+            var r = entity[b]
+            return typeof r === 'string' ? r : a
+        })
+    }
+}())
+
+//console.log('&lt;&quot;&gt;'.deentityify())
+
+var serial_maker = function(){
+
+    var prefix = ''
+    var seq = 0
+    return {
+        set_prefix: function(p){
+            prefix = String(p)
+        },
+        set_seq: function(s){
+            seq = s
+        },
+        gensym: function(){
+            var result = prefix + seq
+            seq += 1
+            return result
+        }
+    }
+}
+
+var seqer = serial_maker()
+seqer.set_prefix("huseet")
+seqer.set_seq(23434)
+var unique = seqer.gensym()
+
