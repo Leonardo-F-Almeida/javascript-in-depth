@@ -338,3 +338,26 @@ seqer.set_prefix("huseet")
 seqer.set_seq(23434)
 var unique = seqer.gensym()
 
+/*
+* CASCADE
+*/
+
+// Some method do not have a return value. For Example, it is typical for methods that set
+// or change the state of an object to return nothing. if we have those methods return this
+// instead of undefined, we can enable cascades.
+
+getElement('myBoxDiv') 
+    .move(350,150)
+    .width(100)
+    .height(100)
+    .color('red')
+    .border('10px outset')
+    .padding('4px')
+    .appendText('Please stand by')
+
+// Each of those methods returns the object, so the result of invocation can be used for
+// the next invocation.
+
+/*
+* CURRY
+*/
