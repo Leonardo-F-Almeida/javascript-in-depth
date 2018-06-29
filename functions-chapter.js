@@ -345,7 +345,7 @@ var unique = seqer.gensym()
 // Some method do not have a return value. For Example, it is typical for methods that set
 // or change the state of an object to return nothing. if we have those methods return this
 // instead of undefined, we can enable cascades.
-
+/*
 getElement('myBoxDiv') 
     .move(350,150)
     .width(100)
@@ -354,10 +354,29 @@ getElement('myBoxDiv')
     .border('10px outset')
     .padding('4px')
     .appendText('Please stand by')
-
+*/
 // Each of those methods returns the object, so the result of invocation can be used for
 // the next invocation.
 
 /*
-* CURRY
+* MEMOIZATION
 */
+
+// Functions can use objects to remember the results of previous operations, making
+// it possible to avoid unnecessary work. This optimization is called memoization,
+// JavaScript objects and arrays are very convenient for this.
+
+var fibonacci = (function (){
+    var memo = [0,1]
+    var fib = function(n){
+        var result = memo[n]
+        if(typeof result !== 'number'){
+            result = fib(n-1)+fib(n-2)
+            memo[n] = result
+        }
+        return result
+    }
+    return fib
+}())
+
+fibonacci(10)
